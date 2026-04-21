@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "skills": {
+    "continual-learning": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "7e6eef17feb93dfbbb3d2d2caca76ddc7da65f7ae41f7cdd6d4478c24c278044"
+    },
+    "copilot-sdk": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "de78052a97cd06884e4478f37b2f8155250c36a1a38c16f1e7d9aa1c1a74e4b3"
+    },
+    "entra-agent-id": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "3e6287dabc9252a396293943cc875a202e8953fd483a9fb57c5546c9f9885bd4"
+    },
+    "frontend-design-review": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "ab7eeeef16d3583172fe0a91a42b85c79cd5e29f79e027dbaa886fce5087e055"
+    },
+    "github-issue-creator": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "4d4ef1ce3824ef0f9690a0f7d081f17552db082541063e42d1f557203608d517"
+    },
+    "kql": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "538a4a053eb0bb16ebd4479c13e143ee214c4c5217041cb615c1409122d9652d"
+    },
+    "mcp-builder": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "d1c0c0cc13f74fac3202f6993778c3fb06737e09754ed73fb985c4e34a7a12d4"
+    },
+    "microsoft-docs": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "4f74ef0fb7127b151a00eee34cf7484414ea85965a2e7681b5775e9ee9484b37"
+    },
+    "podcast-generation": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "bc314c7c2ab4f60959bc2cfa44502ac296f809fc1993f655c8b47277a06eb58e"
+    },
+    "skill-creator": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "b77ddfc5d411d0cbd06c77292ceee27b1e17dbf24372c51f80ba107b6608499f"
+    }
+  }
+}
