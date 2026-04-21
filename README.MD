@@ -1,50 +1,57 @@
 # AI Agentic Skills and Agents Copilot Setup
 
-This repository contains a comprehensive collection of custom agents, skills, and prompts designed to enhance GitHub Copilot's capabilities. It provides specialized tools and workflows for various development tasks, from code review and debugging to content creation and project management.
+This repository is a GitHub Copilot customization pack centered around the `.github` directory. It includes reusable agents, skills, prompts, command templates, hooks, and design references that can be copied into another repository or adapted in place.
 
 ## What's Included
 
-### 🤖 Custom Agents
-A curated set of specialized AI agents for different development scenarios:
-- **Code Reviewers**: Including brutally honest reviewer and enterprise UX reviewer
-- **Debuggers**: JavaScript debugger for efficient troubleshooting
-- **Pair Programmers**: Frontend pair programmer for collaborative coding
-- **Content Creators**: Internal banking copy agent and Gilfoyle agent for specialized content
+### Custom Agents
+`.github/agents/` contains a large library of agent definitions for workflows such as code review, accessibility, debugging, architecture, documentation, performance, security, GitHub operations, and language-specific development.
 
-### 🛠️ Skills Collection
-Over 25+ custom skills covering diverse development domains:
-- **Development Skills**: Fullstack, frontend, backend, mobile (Android/iOS), shader development
-- **Content & Design**: Article editing, interface design, PRD writing, presentation creation
-- **Productivity Tools**: Git guardrails, pre-commit setup, issue triage, code refactoring
-- **Specialized Tools**: PDF/DOCX/Excel processing, GIF creation, e-learning generation
+### Skills
+`.github/skills/` contains skill folders and supporting docs used to extend agent behavior. The collection spans frontend and full-stack development, testing, debugging, content generation, document tooling, refactoring, planning, and repository documentation.
 
-### 📝 Custom Prompts
-Ready-to-use prompts for common development workflows:
-- Feature addition workflows
-- UX review processes
-- E-learning content generation
-- Meta-prompt creation
+### Prompts
+`.github/prompts/` contains reusable prompt files for recurring workflows such as feature work, UX review, e-learning generation, upgrades, and meta-prompting.
+
+### Commands and Hooks
+`.github/commands/` contains markdown command templates for common repo tasks, and `.github/hooks/` contains skill evaluation scripts plus JSON rule definitions and schema files.
+
+### Project Context and References
+The repository also includes shared Copilot instructions, an `about-me.md` context file, a `design-md/` reference library, and an archived `.zip` asset inside `.github/`.
+
+## Current Structure
+
+```text
+agent-skills/
+├── .github/
+│   ├── about-me.md
+│   ├── agents/                    # Agent definitions and supporting metadata
+│   ├── commands/                  # Reusable command templates
+│   ├── copilot-instructions.md    # Shared Copilot behavior and repo guidance
+│   ├── design-md/                 # Reference design system/example sources
+│   ├── grand-ai-hotel-main.zip    # Archived asset kept in-repo
+│   ├── hooks/                     # Skill evaluation scripts, rules, and schema
+│   ├── prompts/                   # Reusable prompt templates
+│   └── skills/                    # Skill folders and supporting docs
+└── README.MD
+```
+
+## Notable Subdirectories
+
+- `.github/agents/`: individual `.agent.md` files, supporting `.md` agent definitions, preferences files, and `SOURCE_REGISTRY.json`.
+- `.github/skills/`: one folder per skill plus supporting docs such as `README.md`, `quick-reference.md`, and diagram/reference files.
+- `.github/prompts/`: prompt files like `add-feature`, `ux-review`, `upgrade-prompt`, and `metaprompt-maker`.
+- `.github/commands/`: task-oriented command docs such as onboarding, PR review, ticket writing, and documentation sync.
+- `.github/hooks/`: shell and JavaScript evaluation helpers plus JSON rule configuration.
+- `.github/design-md/`: brand and product reference folders used for design-oriented work.
 
 ## Getting Started
 
-1. Clone this repository
-2. Copy the `.github` folder to your project's `.github` directory
-3. Customize agents, skills, and prompts as needed for your workflow
-4. Use with GitHub Copilot for enhanced AI assistance
+1. Clone this repository.
+2. Copy the parts of `.github/` you want into your target repository.
+3. Adjust `copilot-instructions.md`, agent definitions, skills, and prompts to match your workflow.
+4. Keep the structure intact if you want GitHub Copilot and related tooling to discover these assets consistently.
 
-## Organization
+## Maintenance Note
 
-```
-superpowers/
-├── .github/
-│   ├── agents/          # Custom agent definitions
-│   ├── skills/          # Skill implementations
-│   ├── prompts/         # Reusable prompts
-│   ├── copilot-instructions.md  # General guidelines
-│   └── about-me.md      # Developer context
-└── README.md
-```
-
-## Contributing
-
-Feel free to contribute your own custom agents, skills, or prompts to expand the collection and help the developer community enhance their Copilot experience.
+If you add or remove directories under `.github/`, update this README so the documented structure stays aligned with the repository.
