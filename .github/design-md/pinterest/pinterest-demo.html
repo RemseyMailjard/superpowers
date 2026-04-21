@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest Design System Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Pin Sans, -apple-system, system-ui, Segoe UI, Roboto, Oxygen-Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, ヒラギノ角ゴ Pro W3, メイリオ, Meiryo, ＭＳ Ｐゴシック, Arial, sans-serif;
+            background: #ffffff;
+            color: #211922;
+            line-height: 1.4;
+        }
+
+        /* Header Navigation */
+        .header {
+            background: #ffffff;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-bottom: 1px solid #e5e5e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #e60023;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-size: 16px;
+            font-weight: 600;
+            color: #211922;
+            text-decoration: none;
+            padding: 12px 16px;
+            border-radius: 16px;
+            transition: background 0.2s;
+        }
+
+        .nav-link:hover {
+            background: #e5e5e0;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 800px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            background: #e5e5e0;
+            border: 1px solid #91918c;
+            border-radius: 16px;
+            padding: 11px 15px 11px 45px;
+            font-size: 16px;
+            color: #211922;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: #435ee5;
+            outline: 2px solid #435ee5;
+            outline-offset: 1px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #62625b;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .btn-circular {
+            background: #e0e0d9;
+            color: #211922;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-circular:hover {
+            background: #bcbcb3;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #ffffff;
+            padding: 80px 24px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 70px;
+            font-weight: 600;
+            color: #211922;
+            margin-bottom: 16px;
+        }
+
+        .hero-subtitle {
+            font-size: 28px;
+            font-weight: 400;
+            color: #62625b;
+            margin-bottom: 32px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: #e60023;
+            color: #000000;
+            padding: 12px 24px;
+            border-radius: 16px;
+            border: 2px solid transparent;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #ad081b;
+        }
+
+        .btn-primary:focus {
+            outline: 2px solid #435ee5;
+            outline-offset: 2px;
+        }
+
+        .btn-secondary {
+            background: #e5e5e0;
+            color: #000000;
+            padding: 12px 24px;
+            border-radius: 16px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #bcbcb3;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #211922;
+            padding: 12px 24px;
+            border-radius: 16px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-ghost:hover {
+            background: #e5e5e0;
+        }
+
+        /* Feature Section */
+        .feature-section {
+            padding: 80px 24px;
+            background: #ffffff;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -1.2px;
+            color: #211922;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        /* Masonry Pin Grid */
+        .pin-grid-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .pin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(236px, 1fr));
+            gap: 16px;
+        }
+
+        .pin-card {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s;
+            break-inside: avoid;
+        }
+
+        .pin-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .pin-image-container {
+            position: relative;
+            width: 100%;
+            background: #e5e5e0;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .pin-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .pin-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            padding: 16px;
+        }
+
+        .pin-card:hover .pin-overlay {
+            opacity: 1;
+        }
+
+        .pin-save-btn {
+            background: #e60023;
+            color: #000000;
+            padding: 8px 16px;
+            border-radius: 16px;
+            border: none;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .pin-content {
+            padding: 12px;
+        }
+
+        .pin-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #211922;
+            margin-bottom: 6px;
+        }
+
+        .pin-description {
+            font-size: 14px;
+            color: #62625b;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .pin-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pin-author {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #62625b;
+        }
+
+        .pin-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #e0e0d9;
+        }
+
+        /* Feature Cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 24px;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid #e5e5e0;
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #e5e5e0;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #211922;
+            margin-bottom: 8px;
+        }
+
+        .feature-description {
+            font-size: 14px;
+            color: #62625b;
+            line-height: 1.5;
+        }
+
+        /* Input Field Example */
+        .input-section {
+            max-width: 600px;
+            margin: 0 auto 80px;
+            padding: 0 24px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #211922;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .input-field {
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid #91918c;
+            border-radius: 16px;
+            padding: 11px 15px;
+            font-size: 16px;
+            color: #211922;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: #435ee5;
+            outline: 2px solid #435ee5;
+            outline-offset: 1px;
+        }
+
+        .input-field::placeholder {
+            color: #91918c;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            background: hsla(60, 20%, 98%, 0.5);
+            color: #62625b;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid #e5e5e0;
+        }
+
+        /* Dark Section */
+        .dark-section {
+            background: #33332e;
+            padding: 80px 24px;
+            color: #ffffff;
+        }
+
+        .dark-section .section-title {
+            color: #ffffff;
+        }
+
+        .dark-section .feature-description {
+            color: #91918c;
+        }
+
+        /* Footer */
+        .footer {
+            background: #33332e;
+            color: #91918c;
+            padding: 48px 24px 24px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer-column h3 {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-link {
+            color: #91918c;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: #ffffff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid #62625b;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .hero-subtitle {
+                font-size: 20px;
+            }
+
+            .pin-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .search-container {
+                max-width: none;
+            }
+        }
+
+        @media (min-width: 1312px) {
+            .pin-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-16 {
+            margin-bottom: 16px;
+        }
+
+        .mb-24 {
+            margin-bottom: 24px;
+        }
+
+        .mb-32 {
+            margin-bottom: 32px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <a href="#" class="logo">Pinterest</a>
+
+        <nav class="nav-links">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">Explore</a>
+            <a href="#" class="nav-link">Create</a>
+        </nav>
+
+        <div class="search-container">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                    d="M7 12C9.76142 12 12 9.76142 12 7C12 4.23858 9.76142 2 7 2C4.23858 2 2 4.23858 2 7C2 9.76142 4.23858 12 7 12Z"
+                    stroke="currentColor" stroke-width="2" />
+                <path d="M11 11L14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <input type="text" class="search-input" placeholder="Search for ideas">
+        </div>
+
+        <div class="header-actions">
+            <button class="btn-circular" aria-label="Notifications">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                        d="M10 2C7.24 2 5 4.24 5 7v4l-2 2v1h14v-1l-2-2V7c0-2.76-2.24-5-5-5zm0 16c1.1 0 2-.9 2-2H8c0 1.1.9 2 2 2z" />
+                </svg>
+            </button>
+            <button class="btn-circular" aria-label="Messages">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M18 8.5v-6h-6v6h6zM11 8.5v-6H5v6h6zM18 15.5v-6h-6v6h6zM11 15.5v-6H5v6h6z" />
+                </svg>
+            </button>
+            <button class="btn-circular" aria-label="Profile">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <circle cx="10" cy="7" r="3" />
+                    <path d="M4 18c0-3.31 2.69-6 6-6s6 2.69 6 6" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title">Find your next idea</h1>
+        <p class="hero-subtitle">Discover recipes, home ideas, style inspiration and more</p>
+        <div class="hero-actions">
+            <button class="btn-primary">Explore now</button>
+            <button class="btn-secondary">Sign up</button>
+            <button class="btn-ghost">Learn more</button>
+        </div>
+    </section>
+
+    <!-- Feature Cards Section -->
+    <section class="feature-section">
+        <h2 class="section-title">What you'll find on Pinterest</h2>
+        <div class="feature-cards">
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">Creative Ideas</h3>
+                <p class="feature-description">Browse billions of inspiring images to spark your creativity and find new
+                    ideas</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📌</div>
+                <h3 class="feature-title">Save & Organize</h3>
+                <p class="feature-description">Keep all your favorite ideas organized in one place with boards</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3 class="feature-title">Try New Things</h3>
+                <p class="feature-description">From recipes to DIY projects, Pinterest helps you try new ideas in real
+                    life</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pin Grid Section -->
+    <section class="pin-grid-container">
+        <h2 class="section-title mb-32">Trending Ideas</h2>
+        <div class="pin-grid">
+            <!-- Pin Card 1 -->
+            <div class="pin-card">
+                <div class="pin-image-container">
+                    <svg class="pin-image" viewBox="0 0 300 400"
+                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="20" font-weight="600">Modern
+                            Interior</text>
+                    </svg>
+                    <div class="pin-overlay">
+                        <button class="pin-save-btn">Save</button>
+                    </div>
+                </div>
+                <div class="pin-content">
+                    <h3 class="pin-title">Minimalist Living Room</h3>
+                    <p class="pin-description">Clean lines and neutral tones create a peaceful space</p>
+                    <div class="pin-meta">
+                        <div class="pin-author">
+                            <div class="pin-avatar"></div>
+                            <span>Design Studio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pin Card 2 -->
+            <div class="pin-card">
+                <div class="pin-image-container">
+                    <svg class="pin-image" viewBox="0 0 300 500"
+                        style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="20" font-weight="600">Recipe
+                            Ideas</text>
+                    </svg>
+                    <div class="pin-overlay">
+                        <button class="pin-save-btn">Save</button>
+                    </div>
+                </div>
+                <div class="pin-content">
+                    <h3 class="pin-title">Homemade Pasta Bowl</h3>
+                    <p class="pin-description">Fresh ingredients for a delicious weeknight dinner</p>
+                    <div class="pin-meta">
+                        <div class="pin-author">
+                            <div class="pin-avatar"></div>
+                            <span>Food Blogger</span>
+                        </div>
+                        <span class="badge">Popular</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pin Card 3 -->
+            <div class="pin-card">
+                <div class="pin-image-container">
+                    <svg class="pin-image" viewBox="0 0 300 350"
+                        style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="20" font-weight="600">Fashion
+                            Style</text>
+                    </svg>
+                    <div class="pin-overlay">
+                        <button class="pin-save-btn">Save</button>
+                    </div>
+                </div>
+                <div class="pin-content">
+                    <h3 class="pin-title">Summer Outfit Ideas</h3>
+                    <p class="pin-description">Light and breezy looks for warm weather</p>
+                    <div class="pin-meta">
+                        <div class="pin-author">
+                            <div class="pin-avatar"></div>
+                            <span>Style Maven</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pin Card 4 -->
+            <div class="pin-card">
+                <div class="pin-image-container">
+                    <svg class="pin-image" viewBox="0 0 300 450"
+                        style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="20" font-weight="600">DIY
+                            Projects</text>
+                    </svg>
+                    <div class="pin-overlay">
+                        <button class="pin-save-btn">Save</button>
+                    </div>
+                </div>
+                <div class="pin-content">
+                    <h3 class="pin-title">Handmade Planters</h3>
+                    <p class="pin-description">Easy weekend project to brighten your home</p>
+                    <div class="pin-meta">
+                        <div class="pin-author">
+                            <div class="pin-avatar"></div>
+                            <span>Craft Corner</span>
+                        </div>
+                        <span class="badge">Trending</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pin Card 5 -->
+            <div class="pin-card">
+                <div class="pin-image-container">
+                    <svg class="pin-image" viewBox="0 0 300 400"
+                        style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="20" font-weight="600">Garden
+                            Ideas</text>
+                    </svg>
+                    <div class="pin-overlay">
+                        <button class="pin-save-btn">Save</button>
+                    </div>
+                </div>
+                <div class="pin-content">
+                    <h3 class="pin-title">Vertical Garden Wall</h3>
+                    <p class="pin-description">Space-saving solution for small gardens</p>
+                    <div class="pin-meta">
+                        <div class="pin-author">
+                            <div class="pin-avatar"></div>
+                            <span>Green Thumb</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pin Card 6 -->
+            <div class="pin-card">
+                <div class="pin-image-container">
+                    <svg class="pin-image" viewBox="0 0 300 380"
+                        style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <text x="50%" y="50%" text-anchor="middle" fill="#333" font-size="20" font-weight="600">Travel
+                            Goals</text>
+                    </svg>
+                    <div class="pin-overlay">
+                        <button class="pin-save-btn">Save</button>
+                    </div>
+                </div>
+                <div class="pin-content">
+                    <h3 class="pin-title">Beach Destinations</h3>
+                    <p class="pin-description">Dream vacations for your bucket list</p>
+                    <div class="pin-meta">
+                        <div class="pin-author">
+                            <div class="pin-avatar"></div>
+                            <span>Wanderlust</span>
+                        </div>
+                        <span class="badge">Saved 10K+</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Input Field Examples -->
+    <section class="feature-section">
+        <h2 class="section-title">Sign up to see more</h2>
+        <div class="input-section">
+            <div class="input-group">
+                <label class="input-label" for="email">Email</label>
+                <input type="email" id="email" class="input-field" placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+                <label class="input-label" for="password">Password</label>
+                <input type="password" id="password" class="input-field" placeholder="Create a password">
+            </div>
+            <button class="btn-primary" style="width: 100%; margin-top: 16px;">Continue</button>
+            <button class="btn-secondary" style="width: 100%; margin-top: 12px;">
+                <svg width="18" height="18" viewBox="0 0 18 18" style="vertical-align: middle; margin-right: 8px;">
+                    <path fill="#4285F4"
+                        d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" />
+                    <path fill="#34A853"
+                        d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z" />
+                    <path fill="#FBBC05"
+                        d="M3.964 10.71c-.18-.54-.282-1.117-.282-1.71s.102-1.17.282-1.71V4.958H.957C.347 6.173 0 7.548 0 9s.348 2.827.957 4.042l3.007-2.332z" />
+                    <path fill="#EA4335"
+                        d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" />
+                </svg>
+                Continue with Google
+            </button>
+        </div>
+    </section>
+
+    <!-- Dark Section -->
+    <section class="dark-section">
+        <h2 class="section-title">See it, make it, try it, do it</h2>
+        <div class="feature-cards">
+            <div class="feature-card" style="background: transparent; border-color: #62625b;">
+                <div class="feature-icon" style="background: #62625b; color: #ffffff;">1</div>
+                <h3 class="feature-title" style="color: #ffffff;">Search</h3>
+                <p class="feature-description">Find ideas for your next project</p>
+            </div>
+            <div class="feature-card" style="background: transparent; border-color: #62625b;">
+                <div class="feature-icon" style="background: #62625b; color: #ffffff;">2</div>
+                <h3 class="feature-title" style="color: #ffffff;">Explore</h3>
+                <p class="feature-description">Dive into a world of inspiration</p>
+            </div>
+            <div class="feature-card" style="background: transparent; border-color: #62625b;">
+                <div class="feature-icon" style="background: #62625b; color: #ffffff;">3</div>
+                <h3 class="feature-title" style="color: #ffffff;">Create</h3>
+                <p class="feature-description">Bring your ideas to life</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">About Pinterest</a></li>
+                    <li><a href="#" class="footer-link">Newsroom</a></li>
+                    <li><a href="#" class="footer-link">Careers</a></li>
+                    <li><a href="#" class="footer-link">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Business</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Pinterest for Business</a></li>
+                    <li><a href="#" class="footer-link">Advertise</a></li>
+                    <li><a href="#" class="footer-link">Developers</a></li>
+                    <li><a href="#" class="footer-link">API</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Help Center</a></li>
+                    <li><a href="#" class="footer-link">Blog</a></li>
+                    <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                    <li><a href="#" class="footer-link">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Instagram</a></li>
+                    <li><a href="#" class="footer-link">Facebook</a></li>
+                    <li><a href="#" class="footer-link">Twitter</a></li>
+                    <li><a href="#" class="footer-link">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Pinterest Design System Demo</p>
+        </div>
+    </footer>
+</body>
+
+</html>

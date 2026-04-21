@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkilldIn - Professioneel Netwerk</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #F3F2EF;
+            color: #000000E6;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background-color: #FFFFFF;
+            height: 52px;
+            border-bottom: 1px solid #00000014;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1128px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 24px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0A66C2;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            background-color: #0A66C2;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 280px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #00000014;
+            border-radius: 8px;
+            background-color: #EDF3F8;
+            font-size: 14px;
+            color: #000000E6;
+        }
+
+        .search-bar input::placeholder {
+            color: #00000066;
+        }
+
+        .nav-items {
+            display: flex;
+            gap: 32px;
+            margin-left: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #00000099;
+            font-size: 12px;
+            line-height: 1.33;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #000000E6;
+        }
+
+        .nav-item.active {
+            color: #000000E6;
+        }
+
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #0A66C2;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+            fill: currentColor;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 4px;
+            right: -4px;
+            background-color: #CC1016;
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1128px;
+            margin: 24px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 225px 1fr 315px;
+            gap: 24px;
+        }
+
+        /* Card Base */
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 0 0 1px #00000014, 0 2px 3px #00000029;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: 0 0 0 1px #00000014, 0 4px 8px #00000029;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            margin-bottom: 8px;
+        }
+
+        .profile-header {
+            height: 56px;
+            background: linear-gradient(135deg, #0A66C2 0%, #004182 100%);
+        }
+
+        .profile-content {
+            padding: 0 12px 12px;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-photo {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin: -36px auto 12px;
+            background-color: #EDF3F8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 600;
+            color: #0A66C2;
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: #000000E6;
+            margin-bottom: 4px;
+        }
+
+        .profile-headline {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42;
+            color: #00000099;
+            margin-bottom: 16px;
+        }
+
+        .profile-stats {
+            border-top: 1px solid #00000014;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        .profile-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 12px;
+            color: #00000099;
+            text-decoration: none;
+        }
+
+        .profile-stat:hover {
+            background-color: #0000000A;
+        }
+
+        .stat-number {
+            font-weight: 600;
+            color: #0A66C2;
+        }
+
+        /* Quick Links Card */
+        .quick-links {
+            padding: 12px;
+        }
+
+        .quick-link {
+            display: block;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #000000E6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .quick-link:hover {
+            color: #0A66C2;
+        }
+
+        /* Feed */
+        .feed {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* Post Composer */
+        .post-composer {
+            padding: 12px 16px;
+        }
+
+        .composer-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .composer-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #EDF3F8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: #0A66C2;
+        }
+
+        .composer-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #00000014;
+            border-radius: 16px;
+            font-size: 14px;
+            color: #000000E6;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .composer-input:hover {
+            background-color: #0000000A;
+        }
+
+        .composer-actions {
+            display: flex;
+            gap: 8px;
+            padding-left: 60px;
+        }
+
+        .composer-action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: #00000099;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .composer-action:hover {
+            background-color: #0000000A;
+        }
+
+        .composer-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Post Card */
+        .post-card {
+            padding: 12px 16px 0;
+        }
+
+        .post-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .post-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #EDF3F8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: #0A66C2;
+        }
+
+        .post-author-info {
+            flex: 1;
+        }
+
+        .post-author-name {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.42;
+            color: #000000E6;
+            text-decoration: none;
+        }
+
+        .post-author-name:hover {
+            color: #0A66C2;
+            text-decoration: underline;
+        }
+
+        .post-author-headline {
+            font-size: 12px;
+            line-height: 1.33;
+            color: #00000099;
+            margin-bottom: 4px;
+        }
+
+        .post-timestamp {
+            font-size: 12px;
+            line-height: 1.33;
+            color: #00000099;
+        }
+
+        .post-content {
+            font-size: 14px;
+            line-height: 1.42;
+            color: #000000E6;
+            margin-bottom: 12px;
+        }
+
+        .post-image {
+            width: calc(100% + 32px);
+            margin: 0 -16px 12px;
+            max-height: 400px;
+            object-fit: cover;
+            background-color: #EDF3F8;
+        }
+
+        .post-engagement {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-top: 1px solid #00000014;
+            border-bottom: 1px solid #00000014;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: #00000099;
+        }
+
+        .post-reactions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .post-actions {
+            display: flex;
+            padding: 8px 0;
+        }
+
+        .post-action {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: #00000099;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .post-action:hover {
+            background-color: #0000000A;
+        }
+
+        .action-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-card {
+            padding: 12px 16px;
+        }
+
+        .sidebar-header {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: #000000E6;
+            margin-bottom: 12px;
+        }
+
+        .news-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #00000014;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-title {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.42;
+            color: #000000E6;
+            margin-bottom: 4px;
+        }
+
+        .news-meta {
+            font-size: 12px;
+            line-height: 1.33;
+            color: #00000099;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: #0A66C2;
+            color: #FFFFFF;
+            padding: 8px 24px;
+            border: none;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #004182;
+        }
+
+        .btn-secondary {
+            background-color: #FFFFFF;
+            color: #0A66C2;
+            padding: 8px 24px;
+            border: 1px solid #0A66C2;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #EDF3F8;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 225px 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .left-sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-items {
+                gap: 16px;
+            }
+
+            .nav-item span {
+                display: none;
+            }
+
+            .search-bar {
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">Si</div>
+                <span>SkilldIn Activaa</span>
+            </a>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Zoeken">
+            </div>
+
+            <div class="nav-items">
+                <a href="#" class="nav-item active">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M23 9v2h-2v7c0 1.7-1.3 3-3 3h-4v-6h-4v6H6c-1.7 0-3-1.3-3-3v-7H1V9l11-7 5 3.2V2h3v5.2z" />
+                    </svg>
+                    <span>Home</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 16v6H3v-6c0-1.66 3.33-3 7-3l1 .09v2.4C7.06 15.69 5 16.89 5 18v2h5v-2l2-2z" />
+                        <path
+                            d="M15.5 11c2.49 0 4.5-2.01 4.5-4.5S17.99 2 15.5 2 11 4.01 11 6.5s2.01 4.5 4.5 4.5zm0-7c1.38 0 2.5 1.12 2.5 2.5S16.88 9 15.5 9 13 7.88 13 6.5 14.12 4 15.5 4z" />
+                        <path
+                            d="M7 11c2.21 0 4-1.79 4-4S9.21 3 7 3 3 4.79 3 7s1.79 4 4 4zm0-6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z" />
+                    </svg>
+                    <span>Mijn Netwerk</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17 6V5c0-1.7-1.3-3-3-3h-4C8.3 2 7 3.3 7 5v1H3v15c0 1.7 1.3 3 3 3h12c1.7 0 3-1.3 3-3V6h-4zm-6-1c0-.6.4-1 1-1h0c.6 0 1 .4 1 1v1h-2V5zm8 16c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1V8h14v13z" />
+                    </svg>
+                    <span>Vacatures</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M16 3H8C6.14 3 4.59 4.28 4.14 6H3c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h1.14c.45 1.72 2 3 3.86 3h8c1.86 0 3.41-1.28 3.86-3H21c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-1.14C19.41 4.28 17.86 3 16 3zm2 15c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2v12z" />
+                    </svg>
+                    <span>Berichten</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M22 19h-8.28a2 2 0 11-3.44 0H2v-1c0-2.37 1.63-4.47 4-5V9c0-2.21 1.79-4 4-4s4 1.79 4 4v4c2.37.53 4 2.63 4 5v1zm-6-6v-3c0-1.1-.9-2-2-2s-2 .9-2 2v3h4zM4 17h16c-.41-1.22-1.52-2-2.8-2h-4.4c-1.28 0-2.39.78-2.8 2z" />
+                    </svg>
+                    <span>Meldingen</span>
+                    <div class="notification-badge">3</div>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <div class="nav-icon"
+                        style="width: 24px; height: 24px; border-radius: 50%; background-color: #EDF3F8; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #0A66C2;">
+                        R</div>
+                    <span>Ik</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Left Sidebar -->
+        <aside class="left-sidebar">
+            <div class="card profile-card">
+                <div class="profile-header"></div>
+                <div class="profile-content">
+                    <div class="profile-photo">R</div>
+                    <h2 class="profile-name">Remsey Mailjard</h2>
+                    <p class="profile-headline">IT-trainer & developer | Microsoft 365, Azure & AI | Power Platform
+                        expert</p>
+
+                    <div class="profile-stats">
+                        <a href="#" class="profile-stat">
+                            <span>Profielbezoeker</span>
+                            <span class="stat-number">894</span>
+                        </a>
+                        <a href="#" class="profile-stat">
+                            <span>Impressies van bijdragen</span>
+                            <span class="stat-number">15.411</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card quick-links">
+                <a href="#" class="quick-link">📌 Mijn items</a>
+                <a href="#" class="quick-link">👥 Groepen</a>
+                <a href="#" class="quick-link">📅 Evenementen</a>
+            </div>
+        </aside>
+
+        <!-- Feed -->
+        <main class="feed">
+            <!-- Post Composer -->
+            <div class="card post-composer">
+                <div class="composer-header">
+                    <div class="composer-avatar">R</div>
+                    <input type="text" class="composer-input" placeholder="Bericht starten" readonly>
+                </div>
+                <div class="composer-actions">
+                    <button class="composer-action">
+                        <svg class="composer-icon" viewBox="0 0 24 24" fill="#378FE9">
+                            <path
+                                d="M19 4H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H5V8l7 4 7-4v10zm-7-6L5 8h14l-7 4z" />
+                        </svg>
+                        <span>Foto</span>
+                    </button>
+                    <button class="composer-action">
+                        <svg class="composer-icon" viewBox="0 0 24 24" fill="#5F9B41">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                        <span>Video</span>
+                    </button>
+                    <button class="composer-action">
+                        <svg class="composer-icon" viewBox="0 0 24 24" fill="#C37D16">
+                            <path
+                                d="M6 2v20h2v-8h5c2.21 0 4-1.79 4-4V6c0-2.21-1.79-4-4-4H6zm2 2h5c1.1 0 2 .9 2 2v4c0 1.1-.9 2-2 2H8V4z" />
+                        </svg>
+                        <span>Artikel schrijven</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Post 1 -->
+            <article class="card post-card">
+                <div class="post-header">
+                    <div class="post-avatar">G</div>
+                    <div class="post-author-info">
+                        <a href="#" class="post-author-name">Gonçalo Feiteira 🏅</a>
+                        <p class="post-author-headline">15x certified | Power Platform Admin & Engineer @ Swiss Post</p>
+                        <p class="post-timestamp">23 u • 🌐</p>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>Goodbye PL-600, PL-500 and PL-200 😢</p>
+                    <p style="margin-top: 8px;">... meer</p>
+                </div>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Crect fill='%231a1a2e' width='800' height='400'/%3E%3Crect fill='%230A66C2' x='100' y='100' width='200' height='200' rx='10'/%3E%3Crect fill='%230A66C2' x='320' y='100' width='200' height='200' rx='10'/%3E%3Crect fill='%230A66C2' x='540' y='100' width='200' height='200' rx='10'/%3E%3Ctext x='200' y='220' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3EPOWER PLATFORM%3C/text%3E%3Ctext x='420' y='220' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3EPOWER AUTOMATE%3C/text%3E%3Ctext x='640' y='220' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3EPOWER PLATFORM%3C/text%3E%3C/svg%3E"
+                    alt="Microsoft Certifications" class="post-image">
+                <div class="post-engagement">
+                    <div class="post-reactions">
+                        <span>👍 ❤️ 💡 242</span>
+                    </div>
+                    <div>
+                        <span>48 reacties</span>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <button class="post-action">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.46 11l-3.91-3.91a7 7 0 01-1.69-2.74l-.49-1.47A2.76 2.76 0 0010.76 1 2.75 2.75 0 008 3.74v1.12a9.19 9.19 0 00.46 2.85L8.89 9H4.12A2.12 2.12 0 002 11.12a2.16 2.16 0 00.92 1.76A2.11 2.11 0 002 14.62a2.14 2.14 0 001.28 2 2 2 0 00-.28 1 2.12 2.12 0 002 2.12v.14A2.12 2.12 0 007.12 22h7.49a8.08 8.08 0 003.58-.84l.31-.16H21V11zM19 19h-1l-.73.37a6.14 6.14 0 01-2.69.63H7.72a1 1 0 01-1-.72l-.25-.87-.85-.41A1 1 0 015 17l.17-1-.76-.74A1 1 0 014.27 14l.66-1.09-.73-1.1a.49.49 0 01.08-.7.48.48 0 01.34-.11h7.05l-1.31-3.92A7 7 0 0110 4.86V3.75a.77.77 0 01.75-.75.75.75 0 01.71.51L12 5a9 9 0 002.13 3.5l4.5 4.5H19z" />
+                        </svg>
+                        <span>Leuk vinden</span>
+                    </button>
+                    <button class="post-action">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 9h10v1H7V9zm0 4h7v-1H7v1z" />
+                            <path
+                                d="M20.5 3h-17A1.5 1.5 0 002 4.5v13A1.5 1.5 0 003.5 19h5.3l3.1 3.8a1 1 0 001.2 0l3.1-3.8h4.3a1.5 1.5 0 001.5-1.5v-13A1.5 1.5 0 0020.5 3zm.5 14.5a.5.5 0 01-.5.5h-4.6l-3.9 4.8-3.9-4.8H3.5a.5.5 0 01-.5-.5v-13a.5.5 0 01.5-.5h17a.5.5 0 01.5.5v13z" />
+                        </svg>
+                        <span>Reageren</span>
+                    </button>
+                    <button class="post-action">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M23 12l-4.61 7H16l4-6H8a3.92 3.92 0 00-4 3.84V17a4 4 0 00.19 1.24L5.12 21H3l-.73-2.22A6.4 6.4 0 012 16.94 6 6 0 018 11h12l-4-6h2.39z" />
+                        </svg>
+                        <span>Delen</span>
+                    </button>
+                    <button class="post-action">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 3L0 10l7.66 4.26L16 8l-6.26 8.34L14 24l7-21z" />
+                        </svg>
+                        <span>Versturen</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Post 2 -->
+            <article class="card post-card">
+                <div class="post-header">
+                    <div class="post-avatar">M</div>
+                    <div class="post-author-info">
+                        <a href="#" class="post-author-name">Maria van Bergen</a>
+                        <p class="post-author-headline">Cloud Solution Architect | Azure Expert | Speaker</p>
+                        <p class="post-timestamp">1 d • 🌐</p>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>Excited to share my latest blog post on Azure security best practices! 🔐 </p>
+                    <p style="margin-top: 8px;">In dit artikel behandel ik de belangrijkste security principles voor
+                        cloud-native applicaties. Van identity management tot network security - alles wat je moet weten
+                        om je Azure omgeving veilig te houden.</p>
+                    <p style="margin-top: 8px; color: #0A66C2;">#Azure #CloudSecurity #BestPractices</p>
+                </div>
+                <div class="post-engagement">
+                    <div class="post-reactions">
+                        <span>👍 💡 🎉 156</span>
+                    </div>
+                    <div>
+                        <span>23 reacties</span>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <button class="post-action">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.46 11l-3.91-3.91a7 7 0 01-1.69-2.74l-.49-1.47A2.76 2.76 0 0010.76 1 2.75 2.75 0 008 3.74v1.12a9.19 9.19 0 00.46 2.85L8.89 9H4.12A2.12 2.12 0 002 11.12a2.16 2.16 0 00.92 1.76A2.11 2.11 0 002 14.62a2.14 2.14 0 001.28 2 2 2 0 00-.28 1 2.12 2.12 0 002 2.12v.14A2.12 2.12 0 007.12 22h7.49a8.08 8.08 0 003.58-.84l.31-.16H21V11zM19 19h-1l-.73.37a6.14 6.14 0 01-2.69.63H7.72a1 1 0 01-1-.72l-.25-.87-.85-.41A1 1 0 015 17l.17-1-.76-.74A1 1 0 014.27 14l.66-1.09-.73-1.1a.49.49 0 01.08-.7.48.48 0 01.34-.11h7.05l-1.31-3.92A7 7 0 0110 4.86V3.75a.77.77 0 01.75-.75.75.75 0 01.71.51L12 5a9 9 0 002.13 3.5l4.5 4.5H19z" />
+                        </svg>
+                        <span>Leuk vinden</span>
+                    </button>
+                    <button class="post-action">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 9h10v1H7V9zm0 4h7v-1H7v1z" />
+                            <path
+                                d="M20.5 3h-17A1.5 1.5 0 002 4.5v13A1.5 1.5 0 003.5 19h5.3l3.1 3.8a1 1 0 001.2 0l3.1-3.8h4.3a1.5 1.5 0 001.5-1.5v-13A1.5 1.5 0 0020.5 3zm.5 14.5a.5.5 0 01-.5.5h-4.6l-3.9 4.8-3.9-4.8H3.5a.5.5 0 01-.5-.5v-13a.5.5 0 01.5-.5h17a.5.5 0 01.5.5v13z" />
+                        </svg>
+                        <span>Reageren</span>
+                    </button>
+                    <button class="post-action">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M23 12l-4.61 7H16l4-6H8a3.92 3.92 0 00-4 3.84V17a4 4 0 00.19 1.24L5.12 21H3l-.73-2.22A6.4 6.4 0 012 16.94 6 6 0 018 11h12l-4-6h2.39z" />
+                        </svg>
+                        <span>Delen</span>
+                    </button>
+                    <button class="post-action">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 3L0 10l7.66 4.26L16 8l-6.26 8.34L14 24l7-21z" />
+                        </svg>
+                        <span>Versturen</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Post 3 -->
+            <article class="card post-card">
+                <div class="post-header">
+                    <div class="post-avatar">J</div>
+                    <div class="post-author-info">
+                        <a href="#" class="post-author-name">Jan de Vries</a>
+                        <p class="post-author-headline">Power Platform Developer | Microsoft MVP</p>
+                        <p class="post-timestamp">2 d • 🌐</p>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>🎉 Trots om te delen dat ik mijn Power Platform Solution Architect certificering heb behaald!
+                    </p>
+                    <p style="margin-top: 8px;">Na maanden van studie en hands-on ervaring is het eindelijk gelukt. Dank
+                        aan iedereen die me heeft geholpen op deze reis. Op naar de volgende uitdaging! 💪</p>
+                    <p style="margin-top: 8px; color: #0A66C2;">#PowerPlatform #Microsoft #Certification</p>
+                </div>
+                <div class="post-engagement">
+                    <div class="post-reactions">
+                        <span>👍 🎉 💪 289</span>
+                    </div>
+                    <div>
+                        <span>67 reacties</span>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <button class="post-action">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19.46 11l-3.91-3.91a7 7 0 01-1.69-2.74l-.49-1.47A2.76 2.76 0 0010.76 1 2.75 2.75 0 008 3.74v1.12a9.19 9.19 0 00.46 2.85L8.89 9H4.12A2.12 2.12 0 002 11.12a2.16 2.16 0 00.92 1.76A2.11 2.11 0 002 14.62a2.14 2.14 0 001.28 2 2 2 0 00-.28 1 2.12 2.12 0 002 2.12v.14A2.12 2.12 0 007.12 22h7.49a8.08 8.08 0 003.58-.84l.31-.16H21V11zM19 19h-1l-.73.37a6.14 6.14 0 01-2.69.63H7.72a1 1 0 01-1-.72l-.25-.87-.85-.41A1 1 0 015 17l.17-1-.76-.74A1 1 0 014.27 14l.66-1.09-.73-1.1a.49.49 0 01.08-.7.48.48 0 01.34-.11h7.05l-1.31-3.92A7 7 0 0110 4.86V3.75a.77.77 0 01.75-.75.75.75 0 01.71.51L12 5a9 9 0 002.13 3.5l4.5 4.5H19z" />
+                        </svg>
+                        <span>Leuk vinden</span>
+                    </button>
+                    <button class="post-action">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 9h10v1H7V9zm0 4h7v-1H7v1z" />
+                            <path
+                                d="M20.5 3h-17A1.5 1.5 0 002 4.5v13A1.5 1.5 0 003.5 19h5.3l3.1 3.8a1 1 0 001.2 0l3.1-3.8h4.3a1.5 1.5 0 001.5-1.5v-13A1.5 1.5 0 0020.5 3zm.5 14.5a.5.5 0 01-.5.5h-4.6l-3.9 4.8-3.9-4.8H3.5a.5.5 0 01-.5-.5v-13a.5.5 0 01.5-.5h17a.5.5 0 01.5.5v13z" />
+                        </svg>
+                        <span>Reageren</span>
+                    </button>
+                    <button class="post-action">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M23 12l-4.61 7H16l4-6H8a3.92 3.92 0 00-4 3.84V17a4 4 0 00.19 1.24L5.12 21H3l-.73-2.22A6.4 6.4 0 012 16.94 6 6 0 018 11h12l-4-6h2.39z" />
+                        </svg>
+                        <span>Delen</span>
+                    </button>
+                    <button class="post-action">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 3L0 10l7.66 4.26L16 8l-6.26 8.34L14 24l7-21z" />
+                        </svg>
+                        <span>Versturen</span>
+                    </button>
+                </div>
+            </article>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar">
+            <div class="card sidebar-card">
+                <div class="sidebar-header">SkilldIn Nieuws</div>
+                <div class="news-item">
+                    <div class="news-title">Overname Kwantum en Leen Bakker rond</div>
+                    <div class="news-meta">23 u geleden • 1.743 lezers</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-title">Loopbaanlessen van topvrouwen</div>
+                    <div class="news-meta">1 d geleden • 372 lezers</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-title">Paasontbijt nog nooit zo duur</div>
+                    <div class="news-meta">1 d geleden • 263 lezers</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-title">Kinderloze collega's vergeten</div>
+                    <div class="news-meta">4 d geleden • 2.804 lezers</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-title">De spelregels van Gen Z</div>
+                    <div class="news-meta">2 d geleden • 1.638 lezers</div>
+                </div>
+            </div>
+
+            <div class="card sidebar-card">
+                <div class="sidebar-header">Populaire cursussen</div>
+                <div class="news-item">
+                    <div class="news-title">Azure Fundamentals</div>
+                    <div class="news-meta">Microsoft Learning</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-title">Power Platform Developer</div>
+                    <div class="news-meta">Skills4-IT</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-title">AI for Business Leaders</div>
+                    <div class="news-meta">AI Academy</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+
+</html>
