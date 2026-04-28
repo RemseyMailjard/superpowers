@@ -28,6 +28,7 @@
             --dropzone-bg: #fbfdff;
             --input-border: #e2e8f0;
             --card-border: #eaf3ff;
+            --accent-muted: #cfe9ff;
         }
 
         * {
@@ -135,7 +136,7 @@
         }
 
         .visual {
-            background: linear-gradient(180deg, #eaf4ff, #fff);
+            background: linear-gradient(180deg, var(--visual-start), var(--visual-end));
             border-radius: 8px;
             padding: 12px;
             display: flex;
@@ -169,7 +170,7 @@
         .choice {
             padding: 10px;
             border-radius: 8px;
-            border: 1px solid #e6eefc;
+            border: 1px solid var(--choice-border);
             cursor: pointer
         }
 
@@ -179,7 +180,7 @@
 
         .progress {
             height: 8px;
-            background: #eef4ff;
+            background: var(--secondary-bg);
             border-radius: 999px;
             overflow: hidden
         }
@@ -199,10 +200,10 @@
         }
 
         .carditem {
-            background: #fff;
+            background: var(--visual-end);
             padding: 12px;
             border-radius: 10px;
-            border: 1px solid #eaf3ff;
+            border: 1px solid var(--card-border);
             cursor: pointer;
             perspective: 600px
         }
@@ -240,8 +241,8 @@
         .draggable {
             padding: 8px 10px;
             border-radius: 8px;
-            border: 1px solid #dbeafe;
-            background: white;
+            border: 1px solid var(--muted-border);
+            background: var(--visual-end);
             cursor: grab
         }
 
@@ -249,13 +250,13 @@
             min-height: 60px;
             padding: 8px;
             border-radius: 8px;
-            border: 2px dashed #dbeafe;
-            background: linear-gradient(180deg, #fff, #fbfdff)
+            border: 2px dashed var(--muted-border);
+            background: linear-gradient(180deg, var(--visual-end), var(--dropzone-bg))
         }
 
         /* Fill-in */
         .inlineinput {
-            border-bottom: 2px solid #e2e8f0;
+            border-bottom: 2px solid var(--input-border);
             padding: 2px 6px;
             border-radius: 4px
         }
@@ -282,8 +283,8 @@
             min-width: 160px;
             padding: 12px;
             border-radius: 10px;
-            background: white;
-            border: 1px solid #eaf3ff;
+            background: var(--visual-end);
+            border: 1px solid var(--card-border);
             cursor: pointer
         }
 
@@ -304,8 +305,8 @@
         .pairitem {
             padding: 10px;
             border-radius: 8px;
-            border: 1px solid #e6eefc;
-            background: white;
+            border: 1px solid var(--choice-border);
+            background: var(--visual-end);
             cursor: pointer
         }
 
@@ -325,8 +326,8 @@
 
         footer {
             padding: 12px 18px;
-            background: #fbfeff;
-            border-top: 1px solid #eef6ff;
+            background: var(--visual-end);
+            border-top: 1px solid var(--surface-variant);
             display: flex;
             justify-content: space-between
         }
@@ -359,7 +360,7 @@
             <section id="screen-cover" class="center">
                 <label for="learnerName">Learner name</label>
                 <input id="learnerName" aria-label="Learner name" placeholder="Your name"
-                    style="padding:10px;border-radius:8px;border:1px solid #e6eefc;width:100%;max-width:360px" />
+                    style="padding:10px;border-radius:8px;border:1px solid var(--choice-border);width:100%;max-width:360px" />
                 <p class="muted">Estimated time: <strong>30 minutes</strong>. Press Start to begin.</p>
                 <div style="display:flex;gap:8px">
                     <button id="startBtn" class="btn" aria-label="Start lesson">Start</button>
@@ -403,9 +404,12 @@
                             <div style="width:180px" class="visual" aria-hidden="true">
                                 <svg width="140" height="90" viewBox="0 0 140 90" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="6" y="6" width="128" height="78" rx="10" fill="#fff" stroke="#dbeafe" />
-                                    <circle cx="38" cy="38" r="16" fill="#eaf4ff" stroke="#dbeafe" />
-                                    <rect x="64" y="28" width="52" height="20" rx="4" fill="#eef4ff" stroke="#dbeafe" />
+                                    <rect x="6" y="6" width="128" height="78" rx="10"
+                                        style="fill:var(--visual-end);stroke:var(--muted-border)" />
+                                    <circle cx="38" cy="38" r="16"
+                                        style="fill:var(--visual-start);stroke:var(--muted-border)" />
+                                    <rect x="64" y="28" width="52" height="20" rx="4"
+                                        style="fill:var(--secondary-bg);stroke:var(--muted-border)" />
                                 </svg>
                             </div>
                         </div>
@@ -419,8 +423,10 @@
                             </div>
                             <div style="width:180px" class="visual" aria-hidden="true">
                                 <svg width="140" height="90" viewBox="0 0 140 90">
-                                    <rect x="8" y="8" width="124" height="74" rx="8" fill="#fff" stroke="#dbeafe" />
-                                    <path d="M22 58c10-12 28-12 40 0" stroke="#cfe9ff" stroke-width="3" fill="none" />
+                                    <rect x="8" y="8" width="124" height="74" rx="8"
+                                        style="fill:var(--visual-end);stroke:var(--muted-border)" />
+                                    <path d="M22 58c10-12 28-12 40 0" style="stroke:var(--accent-muted)"
+                                        stroke-width="3" fill="none" />
                                 </svg>
                             </div>
                         </div>
@@ -434,8 +440,9 @@
                             </div>
                             <div style="width:180px" class="visual" aria-hidden="true">
                                 <svg width="140" height="90" viewBox="0 0 140 90">
-                                    <rect x="6" y="6" width="128" height="78" rx="10" fill="#fff" stroke="#dbeafe" />
-                                    <g fill="#cfe9ff">
+                                    <rect x="6" y="6" width="128" height="78" rx="10"
+                                        style="fill:var(--visual-end);stroke:var(--muted-border)" />
+                                    <g style="fill:var(--accent-muted)">
                                         <rect x="18" y="22" width="20" height="12" rx="3" />
                                         <rect x="46" y="22" width="20" height="12" rx="3" />
                                         <rect x="74" y="22" width="36" height="12" rx="3" />
@@ -453,9 +460,11 @@
                             </div>
                             <div style="width:180px" class="visual" aria-hidden="true">
                                 <svg width="140" height="90" viewBox="0 0 140 90">
-                                    <rect x="6" y="6" width="128" height="78" rx="10" fill="#fff" stroke="#dbeafe" />
-                                    <circle cx="70" cy="40" r="18" fill="#eaf4ff" />
-                                    <path d="M66 38l4 6 8-10" stroke="#0b6efd" stroke-width="2" fill="none" />
+                                    <rect x="6" y="6" width="128" height="78" rx="10"
+                                        style="fill:var(--visual-end);stroke:var(--muted-border)" />
+                                    <circle cx="70" cy="40" r="18" style="fill:var(--visual-start)" />
+                                    <path d="M66 38l4 6 8-10" style="stroke:var(--color-accent)" stroke-width="2"
+                                        fill="none" />
                                 </svg>
                             </div>
                         </div>
@@ -705,7 +714,7 @@
             { year: '2021', title: 'Sandboxing', detail: 'Isolated execution environments became standard.' },
             { year: '2023', title: 'Auditing', detail: 'Audit logs for skills required by policy.' }
         ];
-        function buildTimeline() { const area = document.getElementById('timelineArea'); area.innerHTML = ''; timelineEvents.forEach((ev, i) => { const n = document.createElement('div'); n.className = 'event'; n.tabIndex = 0; n.innerHTML = `<strong>${ev.year}</strong><div class="muted">${ev.title}</div>`; n.addEventListener('click', () => { alert(ev.detail); }); area.appendChild(n); }); }
+        function buildTimeline() { const area = document.getElementById('timelineArea'); area.innerHTML = ''; timelineEvents.forEach((ev, i) => { const n = document.createElement('div'); n.className = 'event'; n.tabIndex = 0; n.innerHTML = `<strong>${ev.year}</strong><div class="muted">${ev.title}</div>`; n.addEventListener('click', () => { alert(ev.detail); }); n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { alert(ev.detail); e.preventDefault(); } }); area.appendChild(n); }); }
 
         // ---------------- Matching ----------------
         const matchLeft = ['Safe runtime', 'Clear API', 'Audit logs'];
@@ -751,7 +760,7 @@
         function buildScenario() { const area = document.getElementById('scenarioArea'); area.innerHTML = ''; renderNode(scenarioTree, area); }
         function renderNode(node, parent) {
             const card = document.createElement('div');
-            card.style.border = '1px solid #eaf3ff';
+            card.style.border = '1px solid var(--card-border)';
             card.style.padding = '10px';
             card.style.borderRadius = '8px';
             card.innerHTML = `<div>${node.text}</div>`;
@@ -779,7 +788,12 @@
 
         function downloadCertificate() {
             const name = state.learner || document.getElementById('learnerName').value || 'Learner'; const topic = 'Agent Skills'; const date = new Date().toLocaleDateString(); const score = Math.round((state.quiz.score / Math.max(1, quizQuestions.length)) * 100);
-            const c = document.createElement('canvas'); c.width = 1200; c.height = 900; const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height); ctx.fillStyle = '#0b1220'; ctx.font = '40px serif'; ctx.fillText('Certificate of Completion', 60, 120); ctx.font = '28px serif'; ctx.fillText(name, 60, 220); ctx.font = '18px serif'; ctx.fillStyle = '#566'; ctx.fillText(`Completed: ${date} • Topic: ${topic}`, 60, 260); ctx.fillStyle = '#0b6efd'; ctx.fillRect(60, 300, 150, 40); ctx.fillStyle = '#fff'; ctx.fillText(`Score: ${score}%`, 70, 327);
+            const css = getComputedStyle(document.documentElement);
+            const bg = (css.getPropertyValue('--visual-end') || '#fff').trim();
+            const text = (css.getPropertyValue('--color-text') || '#0b1220').trim();
+            const mutedText = (css.getPropertyValue('--color-muted') || '#566').trim();
+            const accent = (css.getPropertyValue('--color-accent') || '#0b6efd').trim();
+            const c = document.createElement('canvas'); c.width = 1200; c.height = 900; const ctx = c.getContext('2d'); ctx.fillStyle = bg; ctx.fillRect(0, 0, c.width, c.height); ctx.fillStyle = text; ctx.font = '40px serif'; ctx.fillText('Certificate of Completion', 60, 120); ctx.font = '28px serif'; ctx.fillText(name, 60, 220); ctx.font = '18px serif'; ctx.fillStyle = mutedText; ctx.fillText(`Completed: ${date} • Topic: ${topic}`, 60, 260); ctx.fillStyle = accent; ctx.fillRect(60, 300, 150, 40); ctx.fillStyle = bg; ctx.fillText(`Score: ${score}%`, 70, 327);
             // trigger download
             c.toBlob(blob => { const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'certificate.png'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); });
         }
